@@ -9,11 +9,11 @@
 
       <div class="mt-3">
         <b-pagination-nav
-          v-model="value"
+          :value="currentPage"
           :number-of-pages="showQuantityPage"
           base-url="#"
           align="center"
-          @input="getNewPage(value)"
+          @input="getNewPage($event)"
         ></b-pagination-nav>
       </div>
     </div>
@@ -27,7 +27,6 @@ export default {
   data() {
     return {
       selected: null,
-      value: 1,
       options: [
         { value: null, text: "Количество записей" },
         { value: 10, text: "10" },
@@ -42,7 +41,7 @@ export default {
     this.selected = localStorage.getItem("displayedQuantityPages");
   },
   computed: {
-    ...mapGetters(["showQuantityPage", "currentPage"]),
+    ...mapGetters(["showQuantityPage", "currentPage"])
   },
   methods: {
     ...mapMutations(["saveNumerCurrentPage", "saveDisplayedQuantityPages"]),

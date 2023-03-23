@@ -35,6 +35,7 @@ export default new Vuex.Store({
     },
     saveSearchText(state, text) {
       state.searchText = text;
+      state.pageNumber = 1
     },
     saveDisplayedQuantityPages(state, per_page) {
       state.perPage = per_page;

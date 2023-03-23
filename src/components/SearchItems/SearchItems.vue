@@ -6,7 +6,7 @@
         class="input-search"
         placeholder="Начните вводить текст для поиска (не менее трех символов)"
       ></b-form-input>
-      <b-button variant="primary" href="#" @click="test"
+      <b-button variant="primary" href="#" @click="createSearchText"
         ><b-icon icon="search"></b-icon
       ></b-button>
     </b-container>
@@ -17,6 +17,9 @@
 import { mapActions, mapMutations } from "vuex";
 export default {
   name: "SearchItems",
+  props : {
+    currentPage : Number
+  },
   data() {
     return {
       text: "",
@@ -28,9 +31,10 @@ export default {
   methods: {
     ...mapActions(["getRepOnGIT"]),
     ...mapMutations(["saveSearchText"]),
-    test() {
+    createSearchText() {
       if (this.text.length >= 3) {
         this.saveSearchText(this.text);
+        this.currentPage = 1
         this.getRepOnGIT();
       }
     },
