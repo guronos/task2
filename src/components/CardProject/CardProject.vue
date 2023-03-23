@@ -110,6 +110,7 @@ img {
   height: 22px;
   background: #3454be86;
   border-radius: 20px;
+  text-align: center;
 }
 .icon-cards > .b-icon:hover {
   color: rgb(9, 110, 199);
