@@ -1,28 +1,53 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="search-block">
+      <SearchItems />
+    </div>
+      <div v-if="showRepositories">
+    <b-container>
+    <CardProject />
+    </b-container>
+    <b-container>
+      <PaginationPage />
+    </b-container>
+  </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import CardProject from './components/CardProject'
+import SearchItems from './components/SearchItems'
+import PaginationPage from './components/PaginationPage'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  components: { CardProject, SearchItems, PaginationPage }, 
+  created(){
+    const repItems = JSON.parse(localStorage.reposItems)
+    this.saveSearchText(localStorage.getItem('searchText'))
+    this.saveRepositories(repItems.repositories)
+    this.saveQuantityItems(localStorage.getItem('QuantityItems'))
+  },
+ computed: {
+  ...mapGetters(['showRepositories'])
+}, methods:{
+  ...mapMutations(['saveQuantityItems', 'saveRepositories', 'saveSearchText'])
+}}
 </script>
 
-<style>
+<style lang="scss" scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #edf0f3;
+}
+.search-block {
+  background: #2c3e50;
+  padding: 3rem 0;
+}
+.cards {
+  margin: 1%;
 }
 </style>
