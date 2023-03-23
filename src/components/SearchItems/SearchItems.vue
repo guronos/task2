@@ -17,9 +17,6 @@
 import { mapActions, mapMutations } from "vuex";
 export default {
   name: "SearchItems",
-  props : {
-    currentPage : Number
-  },
   data() {
     return {
       text: "",

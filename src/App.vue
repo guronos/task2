@@ -11,6 +11,11 @@
       <PaginationPage />
     </b-container>
   </div>
+  <div v-else>
+    <div class="loading" v-if="showSearchText">
+      Поиск проектов...
+    </div>
+  </div>
   </div>
 </template>
 
@@ -23,13 +28,17 @@ export default {
   name: 'App',
   components: { CardProject, SearchItems, PaginationPage }, 
   created(){
+    try{
     const repItems = JSON.parse(localStorage.reposItems)
     this.saveSearchText(localStorage.getItem('searchText'))
     this.saveRepositories(repItems.repositories)
     this.saveQuantityItems(localStorage.getItem('QuantityItems'))
+    } catch (e) {
+      return
+    }
   },
  computed: {
-  ...mapGetters(['showRepositories'])
+  ...mapGetters(['showRepositories', 'showSearchText'])
 }, methods:{
   ...mapMutations(['saveQuantityItems', 'saveRepositories', 'saveSearchText'])
 }}
@@ -47,7 +56,9 @@ export default {
   background: #2c3e50;
   padding: 3rem 0;
 }
-.cards {
-  margin: 1%;
+.loading {
+  color:#000;
+  font-size: 22px;
+  font-weight: 600;
 }
 </style>

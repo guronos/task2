@@ -24,6 +24,9 @@ export default new Vuex.Store({
     },
     currentPage(state) {
       return state.pageNumber;
+    },    
+    showSearchText(state) {
+      return state.searchText
     },
   },
   mutations: {
